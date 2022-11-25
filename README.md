@@ -40,6 +40,11 @@ Finally, launch `index.html`
 ## Features
 - Keyword input
 - Radius range slider
+
+## Limitations
+- Google places API only allows up to 60 results utilising the nearby search
+    - Source: https://developers.google.com/maps/documentation/places/web-service/faq#why_are_some_nearby_places_not_returned
+
 ## To Do
 - [ ]   Allow user to select a center location
 - [ ]   Compatible on mobile
