@@ -31,10 +31,15 @@ Install dependencies
   npm install
 ```
 
+Compile typescript
+```bash
+  tsc
+```
+
 Finally, launch `index.html`
 ## Features
 - Keyword input
 - Radius range slider
 ## To Do
-- [ ]   Allow user to select a center location rather than basing it off their geolocation.
+- [ ]   Allow user to select a center location
 - [ ]   Compatible on mobile
