@@ -2,12 +2,12 @@
 // prompted by your browser. If you see the error "The Geolocation service
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
-let map: google.maps.Map;
-let currentLocationInfoWindow: google.maps.InfoWindow;
-let circle: google.maps.Circle;
-let service: google.maps.places.PlacesService;
-let randomRestaurant: google.maps.Marker;
-let restaurantInfoWindow: google.maps.InfoWindow;
+var map: google.maps.Map;
+var currentLocationInfoWindow: google.maps.InfoWindow;
+var circle: google.maps.Circle;
+var service: google.maps.places.PlacesService;
+var randomRestaurant: google.maps.Marker;
+var restaurantInfoWindow: google.maps.InfoWindow;
 var markersArray: google.maps.Marker[];
 
 function initMap(): void {
@@ -70,7 +70,7 @@ function initMap(): void {
 }
 
 //helper function to set multiple attributes at once
-function setAttributes(element, attrs) {
+function setAttributes(element: any, attrs: any) {
   for (var key in attrs) {
     element.setAttribute(key, attrs[key]);
   }
@@ -126,9 +126,13 @@ function drawCircle() {
 }
 
 //radius slider updates
-function updateRadius(circle, radius) {
-  circle.setRadius(radius);
-  map.fitBounds(circle.getBounds());
+function updateRadius(circle: google.maps.Circle | undefined, radius: number) {
+  if (circle === undefined) {
+    return;
+  } else {
+    circle.setRadius(radius);
+    map.fitBounds(circle.getBounds()!);
+  }
 }
 
 function handleLocationError(
@@ -146,7 +150,7 @@ function handleLocationError(
 }
 
 //locates nearby open restaurants within the target radius
-function findRestaurants(cuisine) {
+function findRestaurants(cuisine: HTMLInputElement) {
   var restaurantSearchResults: string[] = [];
   clearMarkers();
   map.setCenter(circle.getCenter()!);
@@ -194,7 +198,14 @@ function findRestaurants(cuisine) {
 
 //determines if a location is within the search radius
 //we need this as google maps api can retrieve places outside of a specified radius
-function arePointsNear(location, centerPoint, km) {
+function arePointsNear(
+  location: google.maps.LatLng | undefined,
+  centerPoint: google.maps.LatLng | undefined,
+  km: number
+): boolean {
+  if (location === undefined || centerPoint === undefined) {
+    return false;
+  }
   var ky = 40000 / 360;
   var kx = Math.cos((Math.PI * centerPoint.lat()) / 180.0) * ky;
   var dx = Math.abs(centerPoint.lng() - location.lng()) * kx;
@@ -202,7 +213,7 @@ function arePointsNear(location, centerPoint, km) {
   return Math.sqrt(dx * dx + dy * dy) <= km;
 }
 
-function chooseRandom(restaurantSearchResults) {
+function chooseRandom(restaurantSearchResults: string | any[]) {
   var randomRestaurant =
     restaurantSearchResults[
       Math.floor(Math.random() * restaurantSearchResults.length)
@@ -226,7 +237,7 @@ function chooseRandom(restaurantSearchResults) {
         place.geometry &&
         place.geometry.location
       ) {
-        var a = createInfoWindow(place);
+        createInfoWindow(place);
         map.setCenter(markersArray[0].getPosition()!);
       }
     }
