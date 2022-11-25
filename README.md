@@ -47,4 +47,5 @@ Finally, launch `index.html`
 
 ## To Do
 - [ ]   Allow user to select a center location
+- [ ]   Add loading display while fetching the random restaurant as there is a delay implemented by Google when fetching the next page results
 - [ ]   Compatible on mobile
