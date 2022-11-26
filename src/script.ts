@@ -68,6 +68,15 @@ function initMap(): void {
   radiusInput.addEventListener("input", () => {
     updateRadius(circle, parseInt(radiusInput.value));
   });
+
+  map.addListener("click", (e: { latLng: google.maps.LatLng }) => {
+    placeCircleAndPanTo(e.latLng, map);
+  });
+}
+
+function placeCircleAndPanTo(latLng: google.maps.LatLng, map: google.maps.Map) {
+  circle.setCenter(latLng);
+  map.panTo(latLng);
 }
 
 //helper function to set multiple attributes at once
