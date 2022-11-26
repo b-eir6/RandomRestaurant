@@ -30,6 +30,7 @@ function initMap(): void {
     "custom-map-control-button",
     "generate-button"
   );
+  setAttributes(generateRandomButton, { id: "generateButton" });
   generateRandomButton.textContent = "Find random restaurant!";
 
   const cuisineSelect = document.createElement("input");
@@ -152,6 +153,9 @@ function handleLocationError(
 //locates nearby open restaurants within the target radius
 function findRestaurants(cuisine: HTMLInputElement) {
   var restaurantSearchResults: string[] = [];
+  var button = document.getElementById("generateButton") as HTMLButtonElement;
+
+  button.disabled = true;
   clearMarkers();
   map.setCenter(circle.getCenter()!);
 
@@ -190,6 +194,7 @@ function findRestaurants(cuisine: HTMLInputElement) {
           pagination.nextPage();
         } else {
           chooseRandom(restaurantSearchResults);
+          button.disabled = false;
         }
       }
     }

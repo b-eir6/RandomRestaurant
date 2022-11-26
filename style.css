@@ -33,8 +33,12 @@ body {
   /* padding: 1em; */
   font-weight: bold;
 }
-.generate-button:hover {
+.generate-button:active:hover:not(:disabled) {
   background: #5dbea3;
+}
+.generate-button:disabled:hover {
+  background: #ff0033;
+  cursor: not-allowed;
 }
 
 .custom-map-control-slider {
