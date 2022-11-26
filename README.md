@@ -36,7 +36,7 @@ Compile typescript
   tsc
 ```
 
-Finally, launch `index.html`
+Finally, launch `index.html` or alternatively if using VS Code - run it thought [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer).
 ## Features
 - Keyword input
 - Radius range slider
